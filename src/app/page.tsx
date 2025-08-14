@@ -1,8 +1,9 @@
+// src/app/page.tsx
 export default function Home() {
   return (
     <main>
-      <h1>Salut 👋</h1>
-      <p>Le build Next.js est OK. (Page d’accueil temporaire)</p>
+      <h1>Bienvenue sur mon site amélioré</h1>
+      <p>Ceci est la page d’accueil</p>
     </main>
   );
 }
