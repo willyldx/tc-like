@@ -1,17 +1,13 @@
+// src/lib/auth.ts
 import { cookies } from 'next/headers';
 import prisma from './db';
+import type { User } from '@prisma/client';
 
-// Exemple simple : récupère un utilisateur à partir de la session
-export async function getUserFromSession() {
-  const cookieStore = cookies();
-  const sessionToken = cookieStore.get('session')?.value;
+export async function getUserFromSession(): Promise<User | null> {
+  const raw = cookies().get('userId')?.value;
+  const id = raw ? Number(raw) : NaN;
+  if (!id) return null;
 
-  if (!sessionToken) return null;
-
-  // À adapter selon ton schéma Prisma
-  const user = await prisma.user.findUnique({
-    where: { sessionToken },
-  });
-
+  const user = await prisma.user.findUnique({ where: { id } });
   return user;
 }
